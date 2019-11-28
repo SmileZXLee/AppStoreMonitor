@@ -1,5 +1,6 @@
-# AppStoreMonitor
-<div align=center><img src="https://static.ifafu.cn/AppStoreMonitorLogo.png" width="100" height="100" /></div>
+<h1 align="center">
+  <img src="http://www.zxlee.cn/AppStoreMonitorLogo.png" width="200" height="200" style="margin-left:100px"/>
+</h1>  
 
 ## 在线地址👉 https://static.ifafu.cn/AppStoreMonitor/index.html
 
