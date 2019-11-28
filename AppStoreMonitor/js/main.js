@@ -52,7 +52,7 @@ var vm = new Vue({
 				this.requestDetailData(true);
 				this.timer = setInterval(function(){
 					$this.requestDetailData(false);
-				},20000)
+				},60000)
 				this.running = true;
 			}else if(this.startBtnText == '结束'){
 				this.end();
