@@ -1,0 +1,97 @@
+/**
+ * AppStoreMonitor
+ * @author ZXLee
+ * @github https://github.com/SmileZXLee/AppStoreMonitor
+ */
+
+body,html{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+	background-color: #fffae8;
+}
+.request-notification{
+	color: rgba(255,0,0,0.7);
+	background-color: rgba(255,0,0,0.1);
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 14px;
+}
+.main{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.top-bar{
+	width: 100%;
+	height: 60px;
+	display: flex;
+	background-color: #edfed4;
+	font-size: 18px;
+}
+
+.top-bar>input{
+	height: 90%;
+	width: calc(100% - 150px);
+	margin-left: 20px;
+	font-size: 18px;
+	border: 0; 
+	outline: none;
+	background-color: rgba(0, 0, 0, 0);
+	color: darkorange;
+}
+.top-bar>div{
+	height: 100%;
+	width: 140px;
+	line-height: 60px;
+	color: white;
+	text-align: center;
+}
+.detail-list{
+	width: 100%;
+	border-top: #eeeeee solid 1px;
+}
+
+.detail-item{
+	width: 100%;
+	font-size: 18px;
+	text-align: center;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: #eeeeee solid 1px;
+	align-items: center;
+}
+.detail-item-left{
+	width: 50%;
+	color: darkorange;
+	height: 60px;
+	line-height: 60px;
+	border-right: #eeeeee solid 1px;
+}
+.detail-item-right{
+	width: 50%;
+	color: #1090fc;
+	font-size: 20px;
+}
+
+.copyRight{
+	position: fixed;
+	width: 100%;
+	bottom: 10px;
+	text-align: center;
+	font-size: 13px;
+	color: darkgray;
+}
