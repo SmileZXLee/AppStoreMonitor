@@ -9,3 +9,6 @@
 * AppStoreMonitor会每隔20秒获取一次应用最新版本信息
 * 若检测到新版本，可通过浏览器推送通知您，无需反复查看应用更新是否已生效
 * 仅限AppStore的App
+
+## 预览通知效果
+![](http://www.zxlee.cn/AppStoreMonitorLogoDemo1.png)
