@@ -13,4 +13,4 @@
 * 仅限AppStore的应用
 
 ## 预览通知效果
-![](http://www.zxlee.cn/AppStoreMonitorLogoDemo1.png)
+![](http://www.zxlee.cn/AppStoreMonitorLogoDemo2.png)
