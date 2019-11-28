@@ -9,13 +9,6 @@ body,html{
 	height: 100%;
 	margin: 0px;
 	padding: 0px;
-	moz-user-select: -moz-none;
-	-moz-user-select: none;
-	-o-user-select:none;
-	-khtml-user-select:none;
-	-webkit-user-select:none;
-	-ms-user-select:none;
-	user-select:none;
 	background-color: #fffae8;
 }
 .request-notification{
@@ -64,7 +57,15 @@ body,html{
 	width: 100%;
 	border-top: #eeeeee solid 1px;
 }
-
+.detail-item-left,.top-bar>div{
+	moz-user-select: -moz-none;
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
 .detail-item{
 	width: 100%;
 	font-size: 18px;

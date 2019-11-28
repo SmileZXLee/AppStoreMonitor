@@ -18,7 +18,7 @@
 				<img src="https://static.ifafu.cn/AppStoreMonitorLogo.png" alt="" style="width: 100px;height: 100px;margin-top: 10px;">
 			</div>
 			<div class="top-bar">
-				<input v-model="appid" type="text" placeholder="请输入应用的appId" maxlength="10" oninput="value=value.replace(/[^\d]/g,'')" >
+				<input v-model="appid" type="text" placeholder="请输入应用的appId" maxlength="20" oninput="value=value.replace(/[^\d]/g,'')" :disabled="running">
 				<div @click="srart" :style="{'background-color':startBtnBacColor}">{{startBtnText}}</div>
 			</div>
 			<div style="color: darkgray;font-size: 14px;margin-top: 10px;width: 100%;text-align: center;" v-if="detailList.length==0">暂无数据</div>
@@ -28,7 +28,7 @@
 					<div class="detail-item-right">{{item.detail}}</div>
 				</div>
 			</div>
-			<div class="copyRight" @click="copyRightClick">By ZXLee Click to visit Github</div>
+			<div class="copyRight" @click="copyRightClick">By ZXLee <span style="color: #1090FC;">Click to visit Github</span></div>
 		</div>
 	</body>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

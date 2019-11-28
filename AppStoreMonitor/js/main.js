@@ -6,11 +6,11 @@
 var vm = new Vue({
 	el: '.main',
 	data: {
-		running: true,
+		running: false,
 		showRequestNotification: false,
 		startBtnText: '开始',
 		startBtnBacColor: '#1090fc',
-		appid: '',
+		appid: localStorage.getItem('appid'),
 		detailList: [],
 		lastBundleID: '',
 		lastVersion: '',
@@ -37,12 +37,11 @@ var vm = new Vue({
 		}
 	},
 	watch:{
-		
+		appid(val){
+			localStorage.setItem('appid',val);
+		}
 	},
 	methods:{
-		requestNotification(){
-			
-		},
 		srart(){
 			if(!this.appid.length){
 				return;
@@ -54,12 +53,9 @@ var vm = new Vue({
 				this.timer = setInterval(function(){
 					$this.requestDetailData(false);
 				},20000)
+				this.running = true;
 			}else if(this.startBtnText == '结束'){
-				this.startBtnText = '开始';
-				this.startBtnBacColor = '#1090fc';
-				if(this.timer){
-					clearInterval(this.timer);
-				}
+				this.end();
 			}
 			
 		},
@@ -76,15 +72,19 @@ var vm = new Vue({
 			return localTime;
 		},
 		currentTime(){
-			var date = new Date();
-			time = '';
-			time += date.getFullYear() + '-'; 
-			time += date.getMonth() + 1 + '-'; 
-			time += date.getDate() + ' ';
-			time += date.getHours() + ':';
-			time += date.getMinutes() + ':';
-			time += date.getSeconds();
-			return time;
+			const time = new Date()
+			let y = time.getFullYear()
+			let m = time.getMonth()+1
+			let d = time.getDate()
+			let h = time.getHours()
+			let mi = time.getMinutes()
+			let s = time.getSeconds()
+			m = m<10?`0${m}`:m
+			d = d<10?`0${d}`:d
+			h = h<10?`0${h}`:h
+			mi = mi<10?`0${mi}`:mi
+			s = s<10?`0${s}`:s
+			return `${y}-${m}-${d} ${h}:${mi}:${s}`
 		},
 		requestDetailData(isFromClick){
 			var $this = this;
@@ -139,15 +139,21 @@ var vm = new Vue({
 						
 					}else{
 						alert('未查询到此应用信息');
-						if($this.timer){
-							clearInterval($this.timer);
-						}
+						$this.end();
 					}
 			    },
 				error: function(data) {
 			        alert('请求失败')
 			    }
 			});
+		},
+		end(){
+			this.startBtnText = '开始';
+			this.startBtnBacColor = '#1090fc';
+			if(this.timer){
+				clearInterval(this.timer);
+				this.running = false;
+			}
 		},
 		sendNotice(version,versionTime){
 			var notification = new Notification("您在AppStore上的App有新版本",
