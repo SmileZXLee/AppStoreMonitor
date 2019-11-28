@@ -12,7 +12,7 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	</head>
 	<body>
-		<div class="main">
+		<div class="main" v-cloak>
 			<div class="request-notification" v-if="showRequestNotification">请授予AppStoreMonitor通知权限，以便AppStoreMonitor在检测到新版本时通知您</div>
 			<div class="main-title">
 				<img src="https://static.ifafu.cn/AppStoreMonitorLogo.png" alt="" style="width: 100px;height: 100px;margin-top: 10px;">
@@ -27,8 +27,9 @@
 					<div class="detail-item-left">{{item.name}}</div>
 					<div class="detail-item-right">{{item.detail}}</div>
 				</div>
+				<div class="copyRight" @click="copyRightClick">By ZXLee <span style="color: #1090FC;">Click to visit Github</span></div>
 			</div>
-			<div class="copyRight" @click="copyRightClick">By ZXLee <span style="color: #1090FC;">Click to visit Github</span></div>
+			
 		</div>
 	</body>
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
