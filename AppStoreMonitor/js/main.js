@@ -129,7 +129,7 @@ var vm = new Vue({
 						}
 						if($this.lastBundleID.length && $this.lastVersion.length && $this.lastBundleID == bundleId){
 							if($this.lastVersion != version){
-								$this.sendNotice(version,$this.timeFormat(currentVersionReleaseDate));
+								$this.sendNotice(trackName,version,$this.timeFormat(currentVersionReleaseDate));
 								//有新版本
 								alert('发现新版本V' + version);
 							}
@@ -155,8 +155,8 @@ var vm = new Vue({
 				this.running = false;
 			}
 		},
-		sendNotice(version,versionTime){
-			var notification = new Notification("您在AppStore上的App有新版本",
+		sendNotice(trackName,version,versionTime){
+			var notification = new Notification('您的应用【' + trackName + '】有已生效的新版本',
 			{body:'版本号:'+version+"\n更新时间:"+versionTime,icon:"https://static.ifafu.cn/AppStoreMonitorLogo.png",
 			});		
 			notification.onclick = function(){		
