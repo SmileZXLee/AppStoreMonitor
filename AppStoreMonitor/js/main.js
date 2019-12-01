@@ -3,6 +3,8 @@
  * @author ZXLee
  * @github https://github.com/SmileZXLee/AppStoreMonitor
  */
+//请求间隔(单位：秒)
+var requestInterval = 60;
 var vm = new Vue({
 	el: '.main',
 	data: {
@@ -14,7 +16,9 @@ var vm = new Vue({
 		detailList: [],
 		lastBundleID: '',
 		lastVersion: '',
-		timer: null
+		requestTimer: null,
+		runningCountTimer: null,
+		runningSec: 0
 	},	
 	mounted () {
 		if (!("Notification" in window)) {
@@ -41,19 +45,18 @@ var vm = new Vue({
 			localStorage.setItem('appid',val);
 		}
 	},
+	computed:{
+		runningSecDesc(){
+			return this.runningSec ? '【持续监测中】 已运行' + this.formatSeconds(this.runningSec) : '';
+		}
+	},
 	methods:{
 		srart(){
 			if(!this.appid.length){
 				return;
 			}
-			var $this = this;
 			if(this.startBtnText == '开始'){
-				this.startBtnText = '加载中...';
-				this.requestDetailData(true);
-				this.timer = setInterval(function(){
-					$this.requestDetailData(false);
-				},60000)
-				this.running = true;
+				this.start();
 			}else if(this.startBtnText == '结束'){
 				this.end();
 			}
@@ -70,6 +73,27 @@ var vm = new Vue({
 			localTime = localTime.substr(0, localTime.lastIndexOf('.'));
 			localTime = localTime.replace('T', ' ');
 			return localTime;
+		},
+		formatSeconds(sec) {
+		    var time = parseInt(sec);
+		    var min = 0;
+		    var hour= 0;
+		    if(time > 60) {
+		        min = parseInt(time/60);
+		        time = parseInt(time%60);
+		        if(min> 60) {
+		            hour= parseInt(min/60);
+		            min = parseInt(min%60);
+		        }
+		    }
+		    var result = "" + parseInt(time) + "秒";
+		    if(min > 0) {
+		        result = "" + parseInt(min) + "分" + result;
+		    }
+		    if(hour> 0) {
+		        result = "" + parseInt(hour) + "小时"+result;
+		    }
+		    return result;
 		},
 		currentTime(){
 			const time = new Date()
@@ -93,7 +117,6 @@ var vm = new Vue({
 			    dataType: 'jsonp',
 			    crossDomain: true,
 			    success: function(data) {
-					console.log(data);
 			        var results = data.results;
 					if(results.length){
 						var detail = results[0];
@@ -132,6 +155,7 @@ var vm = new Vue({
 								$this.sendNotice(trackName,version,$this.timeFormat(currentVersionReleaseDate));
 								//有新版本
 								alert('发现新版本V' + version);
+								$this.end();
 							}
 						}
 						$this.lastBundleID = bundleId;
@@ -143,16 +167,33 @@ var vm = new Vue({
 					}
 			    },
 				error: function(data) {
-			        alert('请求失败')
+					alert('获取应用信息失败');
+					$this.end()
 			    }
 			});
+		},
+		start(){
+			var $this = this;
+			this.startBtnText = '加载中...';
+			this.requestDetailData(true);
+			this.requestTimer = setInterval(function(){
+				$this.requestDetailData(false);
+			},requestInterval * 1000)
+			this.runningCountTimer = setInterval(function(){
+				$this.runningSec += 1;
+			},1000)
+			this.running = true;
 		},
 		end(){
 			this.startBtnText = '开始';
 			this.startBtnBacColor = '#1090fc';
-			if(this.timer){
-				clearInterval(this.timer);
+			this.runningSec = 0;
+			if(this.requestTimer){
+				clearInterval(this.requestTimer);
 				this.running = false;
+			}
+			if(this.runningCountTimer){
+				clearInterval(this.runningCountTimer);
 			}
 		},
 		sendNotice(trackName,version,versionTime){
