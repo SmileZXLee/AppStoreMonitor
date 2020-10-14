@@ -12,28 +12,28 @@
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 	</head>
 	<body>
-		<div class="main" v-cloak>
-			<div class="request-notification" v-if="showRequestNotification">请授予AppStoreMonitor通知权限，以便AppStoreMonitor在检测到新版本时通知您</div>
-			<div class="running-condition" v-if="runningSecDesc.length">{{runningSecDesc}}</div>
+		<div class="main">
+			<div class="request-notification" v-cloak v-if="showRequestNotification">请授予AppStoreMonitor通知权限，以便AppStoreMonitor在检测到新版本时通知您</div>
+			<div class="running-condition" v-cloak v-if="runningSecDesc.length" v-text="runningSecDesc"></div>
 			<div class="main-title">
 				<img src="https://static.ifafu.cn/AppStoreMonitorLogo.png" alt="" style="width: 100px;height: 100px;margin-top: 10px;">
 			</div>
 			<div class="top-bar">
 				<input v-model="appid" type="text" placeholder="请输入应用的appId" maxlength="20" oninput="value=value.replace(/[^\d]/g,'')" :disabled="running">
-				<div @click="srart" :style="{'background-color':startBtnBacColor}">{{startBtnText}}</div>
+				<div v-cloak @click="srart" :style="{'background-color':startBtnBacColor}" v-text="startBtnText"></div>
 			</div>
 			<div style="color: darkgray;font-size: 14px;margin-top: 10px;width: 100%;text-align: center;" v-if="detailList.length==0">暂无数据</div>
 			<div class="detail-list" v-if="detailList.length!=0">
 				<div class="detail-item" v-for="item in detailList">
-					<div class="detail-item-left">{{item.name}}</div>
-					<div class="detail-item-right">{{item.detail}}</div>
+					<div class="detail-item-left" v-text="item.name"></div>
+					<div class="detail-item-right" v-text="item.detail"></div>
 				</div>
-				<div class="copyRight" @click="copyRightClick">By ZXLee <span style="color: #1090FC;">Click to visit Github</span></div>
+				<div class="copyRight" v-cloak @click="copyRightClick">By ZXLee <span style="color: #1090FC;">Click to visit Github</span></div>
 			</div>
 			
 		</div>
 	</body>
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script>
 	<script src="js/vue.min.js"></script>
 	<script src="js/main.js"></script>
 </html>

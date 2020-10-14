@@ -167,7 +167,7 @@ var vm = new Vue({
 					}
 			    },
 				error: function(data) {
-					alert('获取应用信息失败');
+					alert('【网络错误】获取应用信息失败');
 					$this.end()
 			    }
 			});
